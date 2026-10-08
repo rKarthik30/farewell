@@ -135,12 +135,15 @@ export default function Message() {
                 <motion.div initial={{ opacity: 0, y: 10 }} animate={done ? { opacity: 1, y: 0 } : {}} className={`mt-10 ${done ? "" : "pointer-events-none"}`}>
                   <p className="text-slate-400">{farewellMessage.signoff}</p>
                   <p className="text-gradient mt-2 text-3xl font-semibold">{profile.name}</p>
-                  <button
-                    onClick={() => window.dispatchEvent(new Event(SIGNOFF_EVENT))}
-                    className="btn-neon glow-ring mt-10"
-                  >
-                    Sign off <span aria-hidden>❯</span>
-                  </button>
+                  <div className="mt-12 flex flex-col items-start gap-3 border-t border-white/10 pt-8 sm:flex-row sm:items-center sm:justify-between">
+                    <p className="font-mono text-xs uppercase tracking-[0.25em] text-slate-500">Finished reading?</p>
+                    <button
+                      onClick={() => window.dispatchEvent(new Event(SIGNOFF_EVENT))}
+                      className="btn-neon glow-ring"
+                    >
+                      Sign off <span aria-hidden>❯</span>
+                    </button>
+                  </div>
                 </motion.div>
                 {!done && (
                   <button
