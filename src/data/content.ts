@@ -216,7 +216,7 @@ export const farewellMessage = {
 };
 
 /* ---------------------------------------------------------------------------
- *  SIGN-OFF FINALE — starts when the reader clicks "I've read it. Sign off" under the message:
+ *  SIGN-OFF FINALE — starts when the reader clicks "Sign off" under the message:
  *  the page glitches and scrambles, then shows these lines.
  * ------------------------------------------------------------------------- */
 export const signOff = {

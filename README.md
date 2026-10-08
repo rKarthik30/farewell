@@ -40,7 +40,7 @@ npm start            # serves ./out locally
 3. **What I Built** (`Projects.tsx`): 3D flip cards. They flip on hover on desktop and on tap on mobile, and Enter/Space works too.
 4. **Skills & Stack** (`Skills.tsx`): orbiting rings of technologies. Hovering pauses them, and the legend highlights a ring.
 5. **Message** (`Message.tsx`): an "encrypted" message. Clicking decrypt plays a decode animation, then the message is typed out.
-6. **Sign-off finale → Contact** (`SignOff.tsx`, `Contact.tsx`): once the reader has finished the message and clicks "I've read it. Sign off", the page glitches and its text scrambles. Then "Thank you." and "signing off..." appear, the screen powers off like a CRT, and it powers back on as the contact page. The Email and LinkedIn cards copy on click and show a "copied" toast. The Nav "Contact" link also starts it. Text lives in `signOff` and `contact` in `content.ts`.
+6. **Sign-off finale → Contact** (`SignOff.tsx`, `Contact.tsx`): once the reader has finished the message and clicks "Sign off", the page glitches and its text scrambles. Then "Thank you." and "signing off..." appear, the screen powers off like a CRT, and it powers back on as the contact page. The Email and LinkedIn cards copy on click and show a "copied" toast. The Nav "Contact" link also starts it. Text lives in `signOff` and `contact` in `content.ts`.
 
 ## Notes
 
