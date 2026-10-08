@@ -5,8 +5,8 @@ import { useEffect, useMemo, useState } from 'react';
 import SectionHeading from './SectionHeading';
 import { SIGNOFF_EVENT } from './SignOff';
 
-// After the typewriter finishes, wait this long (reading the last lines) before the finale starts.
-const READ_PAUSE_MS = 4000;
+// The finale never starts on a timer (people read at different speeds):
+// the reader starts it with the "Sign off" button once they've finished.
 import { farewellMessage, profile } from '@/data/content';
 
 // The message text comes from `farewellMessage` in src/data/content.ts
@@ -47,15 +47,6 @@ export default function Message() {
     const id = setTimeout(() => setTyped((t) => t + 1), delay);
     return () => clearTimeout(id);
   }, [phase, typed, full, done]);
-
-  // read to the end naturally → roll into the sign-off finale.
-  // (If the reader hit "skip" they haven't read it yet, so they get a button instead.)
-  const [skipped, setSkipped] = useState(false);
-  useEffect(() => {
-    if (phase !== 'open' || !done || skipped) return;
-    const id = setTimeout(() => window.dispatchEvent(new Event(SIGNOFF_EVENT)), READ_PAUSE_MS);
-    return () => clearTimeout(id);
-  }, [phase, done, skipped]);
 
   const unlock = () => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -144,16 +135,19 @@ export default function Message() {
                 <motion.div initial={{ opacity: 0, y: 10 }} animate={done ? { opacity: 1, y: 0 } : {}} className={`mt-10 ${done ? "" : "pointer-events-none"}`}>
                   <p className="text-slate-400">{farewellMessage.signoff}</p>
                   <p className="text-gradient mt-2 text-3xl font-semibold">{profile.name}</p>
-                  <button onClick={() => window.dispatchEvent(new Event(SIGNOFF_EVENT))} className="btn-neon mt-10">
-                    Sign off <span aria-hidden>❯</span>
-                  </button>
+                  <div className="mt-12 flex flex-col items-start gap-3 border-t border-white/10 pt-8 sm:flex-row sm:items-center sm:justify-between">
+                    <p className="font-mono text-xs uppercase tracking-[0.25em] text-slate-500">Finished reading?</p>
+                    <button
+                      onClick={() => window.dispatchEvent(new Event(SIGNOFF_EVENT))}
+                      className="btn-neon glow-ring"
+                    >
+                      I&apos;ve read it. Sign off <span aria-hidden>❯</span>
+                    </button>
+                  </div>
                 </motion.div>
                 {!done && (
                   <button
-                    onClick={() => {
-                      setSkipped(true);
-                      setTyped(full.length);
-                    }}
+                    onClick={() => setTyped(full.length)}
                     className="absolute bottom-5 right-6 font-mono text-xs text-slate-500 hover:text-neon-cyan"
                   >
                     skip ⏭
