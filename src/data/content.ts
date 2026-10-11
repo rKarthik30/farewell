@@ -230,7 +230,7 @@ export const signOff = {
  * ------------------------------------------------------------------------- */
 export const contact = {
   headline: "Let's stay in touch.",
-  sub: 'Open to collaborating on AI-native products, modern frontends and anything that makes the web feel a little magical.',
+  sub: "Different repos from here on, but you'll always be my team.",
   links: [
     {
       icon: 'mail',
