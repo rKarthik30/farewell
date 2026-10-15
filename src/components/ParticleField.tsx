@@ -105,10 +105,12 @@ function Scene({ count }: { count: number }) {
     wire.current.scale.setScalar(1 + Math.sin(t * 1.2) * 0.04);
 
     // tilt + camera parallax toward the mouse
-    group.current.rotation.x = THREE.MathUtils.damp(group.current.rotation.x, m.y * 0.3, 2.5, delta);
+    // the front of the sphere turns toward the cursor, and the camera shifts the
+    // opposite way so the whole cluster also drifts toward the cursor on screen
+    group.current.rotation.x = THREE.MathUtils.damp(group.current.rotation.x, -m.y * 0.3, 2.5, delta);
     group.current.rotation.y = THREE.MathUtils.damp(group.current.rotation.y, m.x * 0.45, 2.5, delta);
-    state.camera.position.x = THREE.MathUtils.damp(state.camera.position.x, m.x * 0.4, 2, delta);
-    state.camera.position.y = THREE.MathUtils.damp(state.camera.position.y, m.y * 0.3, 2, delta);
+    state.camera.position.x = THREE.MathUtils.damp(state.camera.position.x, -m.x * 0.4, 2, delta);
+    state.camera.position.y = THREE.MathUtils.damp(state.camera.position.y, -m.y * 0.3, 2, delta);
     state.camera.lookAt(0, 0, 0);
 
     // repel shell particles near the cursor (cursor mapped into the points' local space)
